@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/tableNameEdit"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:iconTint="@android:color/black"
+        android:title="시간표 이름 바꾸기"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/menuItem_storeTable"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="현재 시간표 저장"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/menuItem_requestFriend"
+
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="친구요청"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/tableColorEdit"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="색 변경"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/red"
+                android:icon="@android:drawable/ic_media_play"
+                android:title="오렌지"
+                app:showAsAction="always|withText" />
+            <item
+                android:id="@+id/yellow"
+                android:icon="@android:drawable/ic_media_play"
+                android:title="노랑"
+                app:showAsAction="always|withText" />
+            <item
+                android:id="@+id/orange"
+                android:icon="@android:drawable/ic_media_play"
+                android:title="주황"
+                app:showAsAction="always|withText" />
+            <item
+                android:id="@+id/pink"
+                android:icon="@android:drawable/ic_media_play"
+                android:title="핑크"
+                app:showAsAction="always|withText" />
+            <item
+                android:id="@+id/purple"
+                android:icon="@android:drawable/ic_media_play"
+                android:title="보라"
+                app:showAsAction="always|withText" />
+            <item
+                android:id="@+id/sky"
+                android:icon="@android:drawable/ic_media_play"
+                android:title="하늘"
+                app:showAsAction="always|withText" />
+            <item
+                android:id="@+id/dark"
+                android:icon="@android:drawable/ic_media_play"
+                android:title="검정"
+                app:showAsAction="always|withText" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/menuItem_logout"
+        android:title="로그아웃"
+        app:showAsAction="withText" />
+
+
+</menu>

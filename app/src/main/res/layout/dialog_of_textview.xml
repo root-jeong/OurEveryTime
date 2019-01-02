@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="월"
+            android:textSize="40sp"
+            android:fontFamily="@font/jua"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="25dp"/>
+        <TextView
+            android:id="@+id/dialogTimeStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9:00"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/jua"
+            android:layout_toRightOf="@+id/textView_day"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/dialogTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오전 9:00~10:00"
+            android:textSize="15sp"
+            android:layout_below="@+id/textView_day"
+            android:fontFamily="@font/jua"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="10dp"/>
+
+
+        <View
+            android:layout_below="@+id/dialogTime"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#bcaaa4"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"/>
+
+    </RelativeLayout>
+
+
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#f0f0f0"
+        android:dividerHeight="1dp">
+
+    </ListView>
+
+
+</LinearLayout>

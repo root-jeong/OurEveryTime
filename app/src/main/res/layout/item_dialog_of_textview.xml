@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <View
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/name"
+        android:background="#795548" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:fontFamily="@font/jua"
+        android:text="name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/name"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/jua"
+        android:text="subject"
+        android:textColor="#9E9E9E"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/professor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/subject"
+        android:layout_marginLeft="13dp"
+        android:layout_toEndOf="@+id/subject"
+        android:layout_toRightOf="@+id/subject"
+        android:fontFamily="@font/jua"
+        android:text="professor"
+        android:textColor="#9E9E9E"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/subject"
+        android:layout_alignLeft="@+id/subject"
+        android:fontFamily="@font/jua"
+        android:text="time"
+        android:textColor="#9E9E9E"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/time"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/time"
+        android:layout_toRightOf="@+id/time"
+        android:fontFamily="@font/jua"
+        android:text="place"
+        android:textColor="#9E9E9E"
+        android:textSize="12sp" />
+
+</RelativeLayout>
