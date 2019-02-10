@@ -1,16 +1,12 @@
 package com.example.gjek1.oureverytimetable.Activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.gjek1.oureverytimetable.BasicStructure.Person;
 import com.example.gjek1.oureverytimetable.ListView.FriendCheckListAdapter;
@@ -39,13 +35,11 @@ public class CheckFriendActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         friendCheckListAdapter = new FriendCheckListAdapter(getApplicationContext());
 
-        ListView lv = (ListView)findViewById(R.id.listView_friend);
+        ListView lv = findViewById(R.id.listView_friend);
         lv.setAdapter(friendCheckListAdapter);
 
         friendCheckListAdapter.LoadAcitivity(persons);
         friendCheckListAdapter.notifyDataSetChanged();
-
-
 
         button4.setOnClickListener(new View.OnClickListener() {
             @Override

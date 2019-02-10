@@ -1,7 +1,6 @@
 package com.example.gjek1.oureverytimetable.ListView;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import com.example.gjek1.oureverytimetable.BasicStructure.StoredTable;
 import com.example.gjek1.oureverytimetable.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class StoredTableAdapater extends BaseAdapter {

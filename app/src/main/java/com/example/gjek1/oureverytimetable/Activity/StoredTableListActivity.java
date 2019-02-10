@@ -42,6 +42,7 @@ public class StoredTableListActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
         // 객체 로드
         btn_load = findViewById(R.id.btn_load);
         btn_delete = findViewById(R.id.btn_delete);

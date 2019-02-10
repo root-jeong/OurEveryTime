@@ -11,7 +11,6 @@ import com.example.gjek1.oureverytimetable.BasicStructure.StoredTable;
 import java.util.ArrayList;
 
 
-
 public class BaseTimeTable {
     final static int day = 5;
     final static int classtime = 32;

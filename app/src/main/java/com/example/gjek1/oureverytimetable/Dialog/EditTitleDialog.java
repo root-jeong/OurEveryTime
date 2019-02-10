@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gjek1.oureverytimetable.R;
+
 public class EditTitleDialog {
 
     private Context context;

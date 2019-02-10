@@ -69,10 +69,16 @@
             android:id="@+id/viewContentOne"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:layout_above="@+id/adView"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="-42dp"
             android:clickable="true"
             android:scrollbars="none">
 
@@ -2674,6 +2680,90 @@
 
                     <TextView
                         android:id="@+id/textView_4_282"
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:background="#FFFFFF"
+                        android:gravity="start"
+                        android:text=" "
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textSize="10dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="0.5dp"
+                    android:layout_marginRight="0.5dp"
+                    android:layout_marginBottom="0.5dp"
+                    android:minHeight="30dp">
+
+                    <TextView
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+
+
+                        android:layout_marginRight="0.5dp"
+                        android:background="#FFFFFF"
+                        android:text=""
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        tools:ignore="RtlCompat" />
+
+                    <TextView
+                        android:id="@+id/textView_0_288"
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="0.5dp"
+
+                        android:background="#FFFFFF"
+                        android:gravity="start"
+                        android:text=" "
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/textView_1_288"
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="0.5dp"
+
+                        android:background="#FFFFFF"
+                        android:gravity="start"
+                        android:text=" "
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/textView_2_288"
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="0.5dp"
+
+                        android:background="#FFFFFF"
+                        android:gravity="start"
+                        android:text=" "
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/textView_3_288"
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="0.5dp"
+
+                        android:background="#FFFFFF"
+                        android:gravity="start"
+                        android:text=" "
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/textView_4_288"
                         android:layout_width="16dp"
                         android:layout_height="match_parent"
                         android:background="#FFFFFF"

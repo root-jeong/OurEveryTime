@@ -14,7 +14,6 @@ import com.example.gjek1.oureverytimetable.HttpRequest.Callback;
 import com.example.gjek1.oureverytimetable.HttpRequest.RequestTask;
 import com.example.gjek1.oureverytimetable.R;
 
-import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;

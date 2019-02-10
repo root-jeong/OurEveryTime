@@ -48,7 +48,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -138,11 +137,14 @@ public class MainActivity extends AppCompatActivity {
     final static int day = 5;
     final static int classtime = 32;
     private String id;
+
     // gson 빌더
     private Gson gson;
+
     // Admob
     private AdView mAdView;
     private CheckTypesTask checkTypesTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -902,7 +904,6 @@ public class MainActivity extends AppCompatActivity {
         return overwrite;
     }
     private class CheckTypesTask extends AsyncTask<Void, Void, Void> {
-
         ProgressDialog asyncDialog = new ProgressDialog(
                 MainActivity.this);
 

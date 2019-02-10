@@ -4,8 +4,6 @@ package com.example.gjek1.oureverytimetable.BasicStructure;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-
 public class Person  implements Parcelable{
     private String name;
     private TimeTable timeTable;

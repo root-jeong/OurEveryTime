@@ -3,6 +3,19 @@ package com.example.gjek1.oureverytimetable.HttpRequest;
 import android.content.ContentValues;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import cz.msebera.android.httpclient.client.CookieStore;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.cookie.Cookie;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
+import cz.msebera.android.httpclient.protocol.HTTP;
+
 public class RequestTask {
     private String cookie;
 
@@ -12,7 +25,8 @@ public class RequestTask {
 
     public void login(String userid, String password, Callback callback) {
         // URL 설정.
-        String url = "http://52.78.122.74/login";
+        // String url = "http://52.78.122.74/login";
+        String url = "https://everytime.kr/user/login";
 
         // 파라미터 설정
         ContentValues param = new ContentValues();
@@ -104,12 +118,48 @@ public class RequestTask {
             this.callback = callback;
         }
 
+        public String postData(String url, ContentValues _params) {
+            HttpClient client = new DefaultHttpClient();
+
+            HttpPost post = new HttpPost(url);
+            List<BasicNameValuePair> params  = new ArrayList<>();
+
+            for(Map.Entry<String, Object> parameter : _params.valueSet()){
+                String key = parameter.getKey();
+                String value = parameter.getValue().toString();
+
+                params.add(new BasicNameValuePair(key, value));
+            }
+
+            try {
+                UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+                post.setEntity(ent);
+                client.execute(post);
+                CookieStore cookies = ((DefaultHttpClient) client).getCookieStore();
+                for (Cookie cookieItem : cookies.getCookies()) {
+                    if(cookieItem.getName().equals("etsid")) {
+                        return cookieItem.getName() + "=" + cookieItem.getValue();
+                    }
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
         @Override
         protected String doInBackground(Void... params) {
-
             String result; // 요청 결과를 저장할 변수.
-            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
-            result = requestHttpURLConnection.request(url, values, cookie); // 해당 URL로 부터 결과물을 얻어온다.
+
+            if(cookie.equals("")) {
+                result = postData(url, values);
+            }
+            else {
+                RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+                result = requestHttpURLConnection.request(url, values, cookie); // 해당 URL로 부터 결과물을 얻어온다.
+            }
 
             return result;
         }
