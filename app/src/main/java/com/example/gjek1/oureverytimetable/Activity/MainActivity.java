@@ -155,8 +155,7 @@ public class MainActivity extends AppCompatActivity {
         checkTypesTask.onPreExecute();
 
         LoadSharedPreparencedTable();
-        MobileAds.initialize(this,
-                "ca-app-pub-3940256099942544~3347511713");
+
         //Admob
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
