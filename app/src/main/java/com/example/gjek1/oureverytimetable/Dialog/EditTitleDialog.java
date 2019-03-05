@@ -40,6 +40,7 @@ public class EditTitleDialog {
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
         final EditText editText_title = (EditText) dlg.findViewById(R.id.editText_title);
+        editText_title.setHint("시간표 이름을 입력해주세요");
         final Button btn_ok = (Button) dlg.findViewById(R.id.btn_ok);
         final Button btn_cancel = (Button) dlg.findViewById(R.id.btn_cancel);
 

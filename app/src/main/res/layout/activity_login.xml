@@ -7,43 +7,55 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp" >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
-
+        android:paddingRight="20dp">
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="15dp"
-            android:text="에브리타임 아이디로 접속하세요."
             android:fontFamily="@font/jua"
             android:gravity="center"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:text="뭐 듣누?"
             android:textColor="@color/input_login"
-            android:textColorHint="@color/input_login_hint" />
+            android:textColorHint="@color/input_login_hint"
+            android:textSize="30dp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/jua"
+            android:gravity="center"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:text="에브리타임 아이디로 접속하세요."
+            android:textColor="@color/input_login"
+            android:textColorHint="@color/input_login_hint"
+            android:textSize="15dp" />
 
         <EditText
 
-        android:id="@+id/et_id"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/rounded_red_textview"
-        android:fontFamily="@font/jua"
-        android:hint="@string/hint_email"
-        android:padding="10dp"
-        android:paddingStart="15dp"
-        android:singleLine="true"
-        android:textColor="@color/input_login"
-        android:textColorHint="@color/input_login_hint"
-        android:paddingLeft="15dp" />
+            android:id="@+id/et_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_red_textview"
+            android:fontFamily="@font/jua"
+            android:hint="@string/hint_email"
+            android:padding="10dp"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:singleLine="true"
+            android:textColor="@color/input_login"
+            android:textColorHint="@color/input_login_hint" />
 
         <EditText
             android:id="@+id/et_pw"
@@ -52,43 +64,44 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_red_textview"
             android:hint="@string/hint_password"
+            android:inputType="textPassword"
             android:padding="10dp"
             android:paddingStart="15dp"
+            android:paddingLeft="15dp"
             android:singleLine="true"
-            android:inputType="textPassword"
             android:textColor="@color/input_login"
-            android:textColorHint="@color/input_login_hint"
-            android:paddingLeft="15dp" />
+            android:textColorHint="@color/input_login_hint" />
 
         <Button
             android:id="@+id/bt_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_red_btn"
-            android:layout_marginBottom="10dp"
-            android:text="@string/btn_login"
+            android:fontFamily="@font/jua"
             android:onClick="onLoginButtonClicked"
-            android:fontFamily="@font/jua"
-            android:textSize="15dp"
-            android:textColor="@color/btn_login" ></Button>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <CheckBox
-            android:layout_weight="1"
-            android:id="@+id/cb_autoLogin"
+            android:text="@string/btn_login"
+            android:textColor="@color/btn_login"
+            android:textSize="15dp"></Button>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="#ffffff"
-            android:textSize="15dp"
-            android:text="자동로그인"
-            android:fontFamily="@font/jua"
-            android:button="@drawable/custom_check_box"
-            />
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/cb_autoLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:button="@drawable/custom_check_box"
+                android:fontFamily="@font/jua"
+                android:text="자동로그인"
+                android:textSize="15dp" />
 
 
-</LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
     <com.google.android.gms.ads.AdView

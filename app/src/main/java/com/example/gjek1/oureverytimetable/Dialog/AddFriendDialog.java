@@ -108,6 +108,7 @@ public class AddFriendDialog {
         final Button btn_cancel = (Button) dlg.findViewById(R.id.btn_cancel);
         final TextView tv_title = (TextView) dlg.findViewById(R.id.title);
 
+        editText_title.setHint("에브리타임 친구 아이디를 입력해주세요");
         tv_title.setText("친구 요청");
 
         btn_ok.setOnClickListener(new View.OnClickListener() {

@@ -28,7 +28,7 @@
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="16dp"
-        android:hint="내용을 입력하세요."
+        android:hint="hint"
         android:singleLine="true"/>
     <View
         android:layout_width="match_parent"

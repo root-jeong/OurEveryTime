@@ -214,28 +214,8 @@ public class MainActivity extends AppCompatActivity {
                                 colorChoice = 0;
                                 setTableColor(colorChoice);
                                 return true;
-                            case R.id.yellow:
-                                colorChoice = 1;
-                                setTableColor(colorChoice);
-                                return true;
-                            case R.id.orange:
-                                colorChoice = 2;
-                                setTableColor(colorChoice);
-                                return true;
-                            case R.id.pink:
-                                colorChoice = 3;
-                                setTableColor(colorChoice);
-                                return true;
-                            case R.id.purple:
-                                colorChoice = 4;
-                                setTableColor(colorChoice);
-                                return true;
-                            case R.id.sky:
-                                colorChoice = 5;
-                                setTableColor(colorChoice);
-                                return true;
                             case R.id.dark:
-                                colorChoice = 6;
+                                colorChoice = 1;
                                 setTableColor(colorChoice);
                                 return true;
                             case R.id.menuItem_logout:
@@ -343,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
 
     // colorChoice(int)와 baseTimeTable의 저장된 정보들로 테이블 색깔 지정
     public void setTableColor(int colorNum) {
-        String color[] = {"#C62917", "#212121", "#212121", "#212121", "#212121","#212121","#212121"};
+        String color[] = {"#C62917", "#212121"};
         // { 에브리타임 , 검정, ... } : 추후에 색깔 정할것임
 
         float alpha = 1.0f;
@@ -856,6 +836,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "버튼을 통해 적용됩니다.", Toast.LENGTH_LONG).show();
             return;
         }
+
 
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
