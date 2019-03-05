@@ -18,6 +18,7 @@ import com.example.gjek1.oureverytimetable.HttpRequest.RequestTask;
 import com.example.gjek1.oureverytimetable.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_id;
@@ -44,6 +45,10 @@ public class LoginActivity extends AppCompatActivity {
         et_id = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
         cb_autoLogin = findViewById(R.id.cb_autoLogin);
+
+        // Admob 초기화
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
