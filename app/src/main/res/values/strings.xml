@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OurEverytimeTable</string>
+    <string name="app_name">뭐듣누</string>
     <string name="hint_email">id</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
