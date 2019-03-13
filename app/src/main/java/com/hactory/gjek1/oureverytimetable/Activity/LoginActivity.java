@@ -66,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                     editor.apply();
 
                     Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                    showDialog();
                     return;
                 }
                 Log.e("[로그인]", s);
@@ -106,7 +105,9 @@ public class LoginActivity extends AppCompatActivity {
         }
         requestTask.login(id, pw, callback);
     }
-
+    public void onSearchButtonClicked(View v) {
+        showDialog();
+    }
     public void showDialog(){
         SearchIDDialog dialog = new SearchIDDialog(this);
         dialog.showDialog();

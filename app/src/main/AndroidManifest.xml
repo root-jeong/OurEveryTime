@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
+
             android:name="com.google.android.gms.ads.APPLICATION_ID"
+
             android:value="ca-app-pub-3940256099942544~3347511713"/>
         <activity android:name="com.hactory.gjek1.oureverytimetable.Activity.LoginActivity">
             <intent-filter>
@@ -21,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name="com.hactory.gjek1.oureverytimetable.Activity.MainActivity" />
         <activity android:name=".Activity.MenuActivity" />
         <activity android:name="com.hactory.gjek1.oureverytimetable.Activity.CheckFriendActivity" />

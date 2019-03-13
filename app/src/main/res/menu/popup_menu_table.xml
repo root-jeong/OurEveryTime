@@ -24,6 +24,7 @@
         android:icon="@android:drawable/ic_menu_edit"
         android:title="친구요청"
         app:showAsAction="withText" />
+    <!--
     <item
         android:id="@+id/tableColorEdit"
         android:icon="@android:drawable/ic_menu_manage"
@@ -43,6 +44,7 @@
                 app:showAsAction="always|withText" />
         </menu>
     </item>
+    -->
 
     <item
         android:id="@+id/menuItem_logout"

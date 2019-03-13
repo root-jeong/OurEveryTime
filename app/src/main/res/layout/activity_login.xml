@@ -72,17 +72,39 @@
             android:textColor="@color/input_login"
             android:textColorHint="@color/input_login_hint" />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <Button
             android:id="@+id/bt_login"
-            android:layout_width="fill_parent"
+            android:layout_weight="4"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_red_btn"
             android:fontFamily="@font/jua"
             android:onClick="onLoginButtonClicked"
-            android:text="@string/btn_login"
+            android:text="로그인"
             android:textColor="@color/btn_login"
             android:textSize="15dp"></Button>
+
+            <Button
+                android:id="@+id/bt_search"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/rounded_red_btn"
+                android:fontFamily="@font/jua"
+                android:onClick="onSearchButtonClicked"
+                android:text="회원정보찾기"
+                android:textColor="@color/btn_login"
+                android:textSize="15dp">
+
+            </Button>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

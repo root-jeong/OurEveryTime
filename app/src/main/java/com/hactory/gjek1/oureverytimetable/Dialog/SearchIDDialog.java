@@ -37,7 +37,7 @@ public class SearchIDDialog {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "에브리타임 홈페이지롱 이동합니다", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "에브리타임 홈페이지로 이동합니다", Toast.LENGTH_SHORT).show();
                 ((LoginActivity)context).moveLink();
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();

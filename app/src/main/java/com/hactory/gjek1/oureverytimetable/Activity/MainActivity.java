@@ -206,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.menuItem_requestFriend:
                                 addFriend();
                                 return true;
+/*
                             case R.id.tableColorEdit:
                                 return true;
                             case R.id.red:
@@ -216,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
                                 colorChoice = 1;
                                 setTableColor(colorChoice);
                                 return true;
+*/
                             case R.id.menuItem_logout:
                                 logout();
                                 return true;
@@ -321,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
 
     // colorChoice(int)와 baseTimeTable의 저장된 정보들로 테이블 색깔 지정
     public void setTableColor(int colorNum) {
-        String color[] = {"#C62917", "#212121"};
+        String color[] = {"#f08676", "#212121"};
         // { 에브리타임 , 검정, ... } : 추후에 색깔 정할것임
 
         float alpha = 1.0f;
