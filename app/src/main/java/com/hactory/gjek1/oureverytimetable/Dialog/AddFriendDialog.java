@@ -47,7 +47,6 @@ public class AddFriendDialog {
         dlg.show();
 
         // 중복 타이틀 입력후 확인시 띄울 다이얼로그
-
         final Callback callback = new Callback() {
             @Override
             public void callback(String s) {

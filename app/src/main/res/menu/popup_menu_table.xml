@@ -25,6 +25,12 @@
         android:title="친구요청"
         app:showAsAction="withText" />
     <item
+        android:id="@+id/menuItem_requestFriendWithKakao"
+
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="카카오톡으로 친구요청"
+        app:showAsAction="withText" />
+    <item
         android:id="@+id/tableColorEdit"
         android:icon="@android:drawable/ic_menu_manage"
         android:title="색 변경"

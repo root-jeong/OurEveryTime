@@ -20,11 +20,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/kakao_scheme"
+                    android:host="@string/kakaolink_host" />
+            </intent-filter>
         </activity>
         <activity android:name="com.hactory.gjek1.oureverytimetable.Activity.MainActivity" />
-        <activity android:name=".Activity.MenuActivity" />
         <activity android:name="com.hactory.gjek1.oureverytimetable.Activity.CheckFriendActivity" />
         <activity android:name="com.hactory.gjek1.oureverytimetable.Activity.StoredTableListActivity"></activity>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
     </application>
 
 </manifest>
