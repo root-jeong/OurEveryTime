@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.hactory.gjek1.oureverytimetable.Dialog.SearchIDDialog;
 import com.hactory.gjek1.oureverytimetable.HttpRequest.Callback;
 import com.hactory.gjek1.oureverytimetable.HttpRequest.RequestTask;
+import com.hactory.gjek1.oureverytimetable.Kakao.KakaoLink;
 import com.hactory.gjek1.oureverytimetable.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -30,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
 
     // 콜백 함수
     private Callback callback;
+
+    // 카카오링크
+    private KakaoLink kakaoLink = new KakaoLink();
+    private String addFriend;
 
     // 자동 로그인
     private SharedPreferences pref;
@@ -54,6 +59,16 @@ public class LoginActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        // 카카오링크 키해시
+        Log.e("[hash]", kakaoLink.getKeyHash(getApplicationContext()));
+
+        addFriend = kakaoLink.checkLink(getIntent());
+        if(addFriend == null) {
+            Log.e("[카카오링크]", "링크 없이 앱실행");
+        } else {
+            Log.e("[카카오링크]", "링크로 앱실행");
+        }
+
         // 로그인 콜백
         callback = new Callback() {
             @Override
@@ -73,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
                 myIntent.putExtra("cookie", s);
                 myIntent.putExtra("user_id", id);
+                myIntent.putExtra("addFriend", addFriend);
                 startActivity(myIntent);
                 finish();
             }

@@ -13,4 +13,7 @@
     <string name="title">시간표</string>
     <string name="AdmobAPPID">ca-app-pub-3940256099942544~3347511713</string>
     <string name="admobUnitID">ca-app-pub-8561572860318852/7004809160</string>
+    <string name="kakao_app_key">5b413cc8833200809d55d7a34651d6f5</string>
+    <string name="kakao_scheme">kakao5b413cc8833200809d55d7a34651d6f5</string>
+    <string name="kakaolink_host">kakaolink</string>
 </resources>

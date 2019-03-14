@@ -31,6 +31,7 @@ import com.hactory.gjek1.oureverytimetable.Dialog.EditTitleDialog;
 import com.hactory.gjek1.oureverytimetable.Dialog.OverlapCheckDialog;
 import com.hactory.gjek1.oureverytimetable.ExtendedStructure.BaseTableArray;
 import com.hactory.gjek1.oureverytimetable.ExtendedStructure.BaseTimeTable;
+import com.hactory.gjek1.oureverytimetable.Kakao.KakaoLink;
 import com.hactory.gjek1.oureverytimetable.ListView.DialogListAdapter;
 import com.hactory.gjek1.oureverytimetable.BasicStructure.Friend;
 import com.hactory.gjek1.oureverytimetable.HttpRequest.Callback;
@@ -124,6 +125,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView_title;
     private ArrayList<StoredTable> storedTables;
 
+    // 카카오링크
+    private KakaoLink kakaoLink = new KakaoLink();
+    private String friend;
+
     // 시간표 텍스트뷰 다이얼로그 변수
     private TextView textView_day;
     private TextView dialogTimeStart;
@@ -155,12 +160,12 @@ public class MainActivity extends AppCompatActivity {
 
         LoadSharedPreparencedTable();
 
-        //Admob
+        // Admob
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        //btn_frinedCheck 정의 + 설정
+        // btn_frinedCheck 정의 + 설정
         btn_friendCheck = findViewById(R.id.btn_friendCheck);
         btn_friendCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,10 +208,15 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.menuItem_storeTable:
                                 storeSharedPreparencdTable();
                                 return true;
-                            case R.id.menuItem_requestFriend:
+/*                            case R.id.menuItem_requestFriend:
                                 addFriend();
+                                return true;*/
+
+                            case R.id.menuItem_requestFriendWithKakao:
+                                addFriendWithKakao();
                                 return true;
 /*
+
                             case R.id.tableColorEdit:
                                 return true;
                             case R.id.red:
@@ -218,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
                                 setTableColor(colorChoice);
                                 return true;
 */
+
                             case R.id.menuItem_logout:
                                 logout();
                                 return true;
@@ -249,6 +260,70 @@ public class MainActivity extends AppCompatActivity {
 
         // 로그인에서 가져온 쿠키
         requestTask.setCookie(getIntent().getStringExtra("cookie"));
+        id = getIntent().getStringExtra("user_id");
+        friend = getIntent().getStringExtra("addFriend");
+
+
+        final Callback addFriendCallback = new Callback() {
+            @Override
+            public void callback(String s) {
+                String result = "";
+                int response = -1;
+
+                Log.e("[LOG]value", s);
+
+                try {
+                    XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
+                    XmlPullParser parser = parserCreator.newPullParser();
+
+                    InputStream targetStream = new ByteArrayInputStream(s.getBytes());
+                    parser.setInput(new InputStreamReader(targetStream, "UTF-8"));
+                    int parseEvent = parser.getEventType();
+
+                    while (parseEvent != XmlPullParser.END_DOCUMENT) {
+                        switch (parseEvent) {
+                            case XmlPullParser.START_TAG:
+                                tag = parser.getName();
+                                if(tag.equals("response")) {
+                                    response = Integer.parseInt(parser.nextText());
+                                    Log.e("response", parser.nextText());
+                                }
+                                break;
+                        }
+                        parseEvent = parser.next();
+                    }
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Log.e("[LOG]END", Integer.toString(response));
+                if (response == 1) {
+                    result = "친구 요청을 보냈습니다.\n상대방이 수락하면 친구가 맺어집니다.";
+                } else if (response == -1) {
+                    result = "올바르지 않은 상대입니다.";
+                } else if (response == -2) {
+                    result = "이미 친구인 상대입니다.";
+                } else if (response == -3) {
+                    result = "이미 친구 요청을 보낸 상대입니다.\n상대방이 수락하면 친구가 맺어집니다.";
+                } else {
+                    result = "친구 요청을 할 수 없습니다.";
+                }
+
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            }
+        };
+
+        if(friend == null) {
+            Log.e("[카카오링크 intent]", "null");
+        }
+        else {
+            Log.e("[카카오링크 intent]", friend);
+            requestTask.requestFriend(friend, addFriendCallback);
+        }
 
         // 자신의 테이블 리스트 불러오기
         setLoadMyTableList();
@@ -382,6 +457,11 @@ public class MainActivity extends AppCompatActivity {
         AddFriendDialog customDialog = new AddFriendDialog(MainActivity.this);
         // 커스텀 다이얼로그를 호출한다.
         customDialog.callFunction(requestTask);
+    }
+
+    // 카카오톡으로 친구 요청
+    public void addFriendWithKakao() {
+        kakaoLink.sendLink(getApplicationContext(), id);
     }
 
     // MainActivity로 이동후 Paser Start 함수

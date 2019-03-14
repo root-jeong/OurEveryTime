@@ -25,6 +25,12 @@ public class FriendCheckListAdapter extends BaseAdapter {
         FriendCheckListItems = new ArrayList<FriendCheckListItem>();
         this.context = context;
     }
+
+    static class ViewHolder{
+        TextView name = null;
+        CheckBox checkBox = null;
+    }
+
     @Override
     public int getCount() {
         return FriendCheckListItems.size();
@@ -43,18 +49,31 @@ public class FriendCheckListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
-        TextView name = null;
-        CheckBox checkBox = null;
+        View v = convertView;
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_check_friend, null);
+            v = inflater.inflate(R.layout.item_check_friend, null);
+            ViewHolder holder = new ViewHolder();
+            holder.name = (TextView)v.findViewById(R.id.textView_name);
+            holder.checkBox = (CheckBox) v.findViewById(R.id.checkBox_);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    FriendCheckListItems.get(pos).setChecked(isChecked);
+                }
+            });
+            v.setTag(holder);
         }
-        name = convertView.findViewById(R.id.textView_name);
-        checkBox = convertView.findViewById(R.id.checkBox_);
-
-
         FriendCheckListItem friendCheckListItem = FriendCheckListItems.get(pos);
+
+
+        if(friendCheckListItem != null) {
+            ViewHolder holder = (ViewHolder)v.getTag();
+            holder.name.setText(friendCheckListItem.getName());
+            holder.checkBox.setChecked(friendCheckListItem.getChecked());
+        }
+
         name.setText(friendCheckListItem.getName());
         if(friendCheckListItem.getChecked()){
             checkBox.setChecked(true);
@@ -66,7 +85,7 @@ public class FriendCheckListAdapter extends BaseAdapter {
             }
         });
 
-        final CheckBox finalCheckBox = checkBox;
+/*        final CheckBox finalCheckBox = checkBox;
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,9 +95,9 @@ public class FriendCheckListAdapter extends BaseAdapter {
                     finalCheckBox.setChecked(false);
                 }
             }
-        });
+        });*/
 
-        return convertView;
+        return v;
     }
     public void LoadAcitivity(ArrayList<Person> persons) {
         FriendCheckListItem friendCheckListItem;
