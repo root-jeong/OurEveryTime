@@ -49,6 +49,8 @@ public class FriendCheckListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
+        TextView name = null;
+        CheckBox checkBox = null;
         View v = convertView;
 
         if (convertView == null) {
@@ -102,13 +104,13 @@ public class FriendCheckListAdapter extends BaseAdapter {
     public void LoadAcitivity(ArrayList<Person> persons) {
         FriendCheckListItem friendCheckListItem;
         this.persons = persons;
-    for(int i = 0 ; i < persons.size(); i++){
-        friendCheckListItem = new FriendCheckListItem();
-        friendCheckListItem.setChecked(persons.get(i).getChecked());
-        friendCheckListItem.setName(persons.get(i).getName());
-        FriendCheckListItems.add(friendCheckListItem);
-        Log.e(persons.get(i).getName(),"추가됨");
-    }
+        for(int i = 0 ; i < persons.size(); i++){
+            friendCheckListItem = new FriendCheckListItem();
+            friendCheckListItem.setChecked(persons.get(i).getChecked());
+            friendCheckListItem.setName(persons.get(i).getName());
+            FriendCheckListItems.add(friendCheckListItem);
+            Log.e(persons.get(i).getName(),"추가됨");
+        }
     }
 
     public ArrayList<Person> getResult(){

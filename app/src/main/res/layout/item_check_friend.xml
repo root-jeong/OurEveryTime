@@ -25,10 +25,10 @@
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
         android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"
         android:button="@drawable/custom_check_box"
-        />
+        android:clickable="false" />
 
 
 
