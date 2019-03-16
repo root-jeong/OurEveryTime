@@ -17,7 +17,7 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 import cz.msebera.android.httpclient.protocol.HTTP;
 
 public class RequestTask {
-    private String cookie;
+    private String cookie = "";
 
     public void setCookie(String cookie) {
         this.cookie = cookie;

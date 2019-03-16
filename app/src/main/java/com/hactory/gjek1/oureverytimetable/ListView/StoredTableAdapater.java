@@ -49,7 +49,6 @@ public class StoredTableAdapater extends BaseAdapter {
         TextView title = null;
         CheckBox checkBox = null;
 
-
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_storedtable_list, null);

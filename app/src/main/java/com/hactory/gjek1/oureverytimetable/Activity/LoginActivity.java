@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
                 myIntent.putExtra("cookie", s);
-                myIntent.putExtra("user_id", id);
+                myIntent.putExtra("id", id);
                 myIntent.putExtra("addFriend", addFriend);
                 startActivity(myIntent);
                 finish();

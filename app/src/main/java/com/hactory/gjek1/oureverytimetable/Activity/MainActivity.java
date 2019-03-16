@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StoredTableListActivity.class);
                 intent.putExtra("storeTables", storedTables);
+                intent.putExtra("id", id);
                 startActivityForResult(intent, 888);
             }
         });
@@ -260,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 로그인에서 가져온 쿠키
         requestTask.setCookie(getIntent().getStringExtra("cookie"));
-        id = getIntent().getStringExtra("user_id");
+        id = getIntent().getStringExtra("id");
         friend = getIntent().getStringExtra("addFriend");
 
 
@@ -371,11 +372,14 @@ public class MainActivity extends AppCompatActivity {
             storedTable.setColorSelectoin(colorChoice);
             storedTables.add(storedTable);
             String json = gson.toJson(storedTables, listType);
+            Log.e("[저장 객체]" , id + " : " + json);
 
             SharedPreferences sp = getSharedPreferences("ourTimeTable", MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString(id, json); // JSON으로 변환한 객체를 저장한다.
             editor.apply();
+
+            Toast.makeText(getApplicationContext(), "현재 시간표를 저장했습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -383,7 +387,6 @@ public class MainActivity extends AppCompatActivity {
     // SharedPrepareneced에 저장된 StoreTable ArrayList 가져옴 : 없다면 storedTables의 size : 0
     private void LoadSharedPreparencedTable() {
         SharedPreferences sp = getSharedPreferences("ourTimeTable", MODE_PRIVATE);
-        id =   sp.getString("id", "");
         storedTables = new ArrayList<StoredTable>();
         String strContact = sp.getString(id, "");
 
