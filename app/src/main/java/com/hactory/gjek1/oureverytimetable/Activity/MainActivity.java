@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int CUSTOM_DIALOG_ID = 100;
     private Dialog dialog = null;
     private MyClickListener myClickListener;
-    private ImageButton btn_friendCheck;
-    private ImageButton btn_tableEdit;
+    private Button btn_friendCheck;
+    private Button btn_tableEdit;
     private Button btn_loadList;
     private TextView textView_title;
     private ArrayList<StoredTable> storedTables;
