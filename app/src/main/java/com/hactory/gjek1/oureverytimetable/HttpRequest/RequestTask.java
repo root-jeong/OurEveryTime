@@ -25,8 +25,8 @@ public class RequestTask {
 
     public void login(String userid, String password, Callback callback) {
         // URL 설정.
-        // String url = "http://52.78.122.74/login";
-        String url = "https://everytime.kr/user/login";
+        //String url = "https://everytime.kr/user/login";
+        String url = "http://soybean.cf/login";
 
         // 파라미터 설정
         ContentValues param = new ContentValues();
@@ -153,13 +153,8 @@ public class RequestTask {
         protected String doInBackground(Void... params) {
             String result; // 요청 결과를 저장할 변수.
 
-            if(cookie.equals("")) {
-                result = postData(url, values);
-            }
-            else {
-                RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
-                result = requestHttpURLConnection.request(url, values, cookie); // 해당 URL로 부터 결과물을 얻어온다.
-            }
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(url, values, cookie); // 해당 URL로 부터 결과물을 얻어온다.
 
             return result;
         }
