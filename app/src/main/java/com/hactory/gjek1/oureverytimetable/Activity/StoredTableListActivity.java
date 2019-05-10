@@ -47,10 +47,13 @@ public class StoredTableListActivity extends AppCompatActivity {
         btn_load = findViewById(R.id.btn_load);
         btn_delete = findViewById(R.id.btn_delete);
 
+        id = getIntent().getStringExtra("id");
+        if(id == null) id = "";
+
         storedTables = new ArrayList<StoredTable>();
         SharedPreferences sp = getSharedPreferences("ourTimeTable", MODE_PRIVATE);
-        id = sp.getString("id","");
         String strContact = sp.getString(id, "");
+        Log.e("[받아온 배열]", id + " / " + strContact);
 
         listType = new TypeToken<ArrayList<StoredTable>>() {
         }.getType();
@@ -59,6 +62,7 @@ public class StoredTableListActivity extends AppCompatActivity {
 
         if (storedTables == null) {
             storedTables = new ArrayList<StoredTable>();
+            Log.e("[체크]", "null이래!");
         }
 
         storedTableAdapater = new StoredTableAdapater(getApplicationContext());

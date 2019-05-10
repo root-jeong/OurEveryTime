@@ -31,32 +31,39 @@
 
         <Button
             android:id="@+id/btn_loadList"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:text="불러오기"
+            android:fontFamily="@font/jua"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/btn_friendCheck"
-            android:background="@drawable/ic_folder_everytime_32dp" />
+            android:background="@drawable/textview_black_white_redline"
+            android:layout_toLeftOf="@+id/btn_friendCheck"      />
+            <!-- android:background="@drawable/ic_folder_everytime_32dp" -->
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_tableEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="메뉴"
+            android:fontFamily="@font/jua"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_menu_everytime_32dp" />
-
-        <ImageButton
+            android:background="@drawable/rounded_red_btn"
+         />
+        <!--android:background="@android:color/transparent"-->
+        <Button
             android:id="@+id/btn_friendCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:fontFamily="@font/jua"
             android:layout_centerVertical="true"
+            android:text="친구선택"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/btn_tableEdit"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_group_add_everytime_32dp" />
-
+            android:background="@drawable/textview_black_white_redline"
+        />
+            <!--android:background="@android:color/transparent"-->
 
     </RelativeLayout>
 
@@ -78,7 +85,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="-42dp"
+
             android:clickable="true"
             android:scrollbars="none">
 

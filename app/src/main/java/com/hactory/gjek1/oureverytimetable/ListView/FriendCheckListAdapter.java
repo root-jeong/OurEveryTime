@@ -20,17 +20,10 @@ public class FriendCheckListAdapter extends BaseAdapter {
     private ArrayList<FriendCheckListItem> FriendCheckListItems;
     private ArrayList<Person> persons;
 
-
     public FriendCheckListAdapter(Context context){
         FriendCheckListItems = new ArrayList<FriendCheckListItem>();
         this.context = context;
     }
-
-    static class ViewHolder{
-        TextView name = null;
-        CheckBox checkBox = null;
-    }
-
     @Override
     public int getCount() {
         return FriendCheckListItems.size();
@@ -49,66 +42,53 @@ public class FriendCheckListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
-        View v = convertView;
+        TextView name = null;
+        CheckBox checkBox = null;
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.item_check_friend, null);
-            ViewHolder holder = new ViewHolder();
-            holder.name = (TextView)v.findViewById(R.id.textView_name);
-            holder.checkBox = (CheckBox) v.findViewById(R.id.checkBox_);
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    FriendCheckListItems.get(pos).setChecked(isChecked);
-                }
-            });
-            v.setTag(holder);
+            convertView = inflater.inflate(R.layout.item_check_friend, null);
         }
+        name = convertView.findViewById(R.id.textView_name);
+        checkBox = convertView.findViewById(R.id.checkBox_);
+
         FriendCheckListItem friendCheckListItem = FriendCheckListItems.get(pos);
-
-
-        if(friendCheckListItem != null) {
-            ViewHolder holder = (ViewHolder)v.getTag();
-            holder.name.setText(friendCheckListItem.getName());
-            holder.checkBox.setChecked(friendCheckListItem.getChecked());
-        }
-
         name.setText(friendCheckListItem.getName());
-        if(friendCheckListItem.getChecked()){
-            checkBox.setChecked(true);
-        }
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                FriendCheckListItems.get(pos).setChecked(isChecked);
-            }
-        });
 
-/*        final CheckBox finalCheckBox = checkBox;
+        if(FriendCheckListItems.get(pos).getChecked()){
+            checkBox.setChecked(true);
+        }else{
+            checkBox.setChecked(false);
+        }
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!FriendCheckListItems.get(pos).getChecked()){
+                CheckBox finalCheckBox = v.findViewById(R.id.checkBox_);
+
+                if(!finalCheckBox.isChecked()){
                     finalCheckBox.setChecked(true);
+
                 }else{
                     finalCheckBox.setChecked(false);
                 }
-            }
-        });*/
 
-        return v;
+                FriendCheckListItems.get(pos).setChecked(finalCheckBox.isChecked());
+            }
+        });
+
+        return convertView;
     }
     public void LoadAcitivity(ArrayList<Person> persons) {
         FriendCheckListItem friendCheckListItem;
         this.persons = persons;
-    for(int i = 0 ; i < persons.size(); i++){
-        friendCheckListItem = new FriendCheckListItem();
-        friendCheckListItem.setChecked(persons.get(i).getChecked());
-        friendCheckListItem.setName(persons.get(i).getName());
-        FriendCheckListItems.add(friendCheckListItem);
-        Log.e(persons.get(i).getName(),"추가됨");
-    }
+        for(int i = 0 ; i < persons.size(); i++){
+            friendCheckListItem = new FriendCheckListItem();
+            friendCheckListItem.setChecked(persons.get(i).getChecked());
+            friendCheckListItem.setName(persons.get(i).getName());
+            FriendCheckListItems.add(friendCheckListItem);
+            Log.e(persons.get(i).getName(),"추가됨");
+        }
     }
 
     public ArrayList<Person> getResult(){
