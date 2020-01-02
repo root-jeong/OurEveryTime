@@ -26,7 +26,7 @@ public class RequestTask {
     public void login(String userid, String password, Callback callback) {
         // URL 설정.
         //String url = "https://everytime.kr/user/login";
-        String url = "http://soybean.cf/login";
+        String url = "http://15.164.86.154/login";
 
         // 파라미터 설정
         ContentValues param = new ContentValues();
