@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gson = new GsonBuilder().create();
-       checkTypesTask = new CheckTypesTask();
+        checkTypesTask = new CheckTypesTask();
         checkTypesTask.onPreExecute();
 
         LoadSharedPreparencedTable();
@@ -781,8 +781,6 @@ public class MainActivity extends AppCompatActivity {
                                 } else if (tag.equals("user")) {
                                     isUser = true;
                                 }
-
-
                                 if (isTable) {
                                     timeTable.setTableId(parser.getAttributeValue(null, "id"));
                                     if (isSubject) {
@@ -796,7 +794,6 @@ public class MainActivity extends AppCompatActivity {
                                             subject.setProfessor(parser.getAttributeValue(null, "value"));
                                         else if (tag.equals("time"))
                                             subject.setTime(parser.getAttributeValue(null, "value"));
-
                                         if (isData) {
                                             subjectData.setPlace(parser.getAttributeValue(null, "place"));
                                             subjectData.setEndTime(Integer.parseInt(parser.getAttributeValue(null, "endtime")));
@@ -808,7 +805,6 @@ public class MainActivity extends AppCompatActivity {
                                     person.setName(parser.getAttributeValue(null, "name"));
                                 }
                                 break;
-
                             case XmlPullParser.END_TAG:
                                 tag = parser.getName();
                                 if (tag.equals("table")) {
@@ -816,6 +812,7 @@ public class MainActivity extends AppCompatActivity {
                                     timeTable.setSubjects(subjects);
                                     person.setTimeTable(timeTable);
                                     Log.e("END_TAG:table", "Mytable 파싱완료");
+
                                 } else if (tag.equals("time")) {
                                     isTime = false;
                                     subject.setData(subjectDataList);
@@ -831,19 +828,17 @@ public class MainActivity extends AppCompatActivity {
                                     Log.e("END_TAG:response", "FriendTable 파싱완료");
                                     person.setChecked(false);
                                     baseTimeTable.addPerson(person);
-
                                 }
                         }
                         parseEvent = parser.next();
-
-
                     }
-
-                    if (myFriendList.size() + 1 == baseTimeTable.persons.size()) {
-                        Void result = null;
-                        checkTypesTask.onPostExecute(result);
+                    Log.e("[myFriendList]",Integer.toString(myFriendList.size() + 1));
+                    Log.e("[baseTimeTable]",Integer.toString(baseTimeTable.persons.size()));
+                    if (myFriendList.size() == baseTimeTable.persons.size() + 1) {
                         baseTimeTable.setBaseTableArray();
                         Log.e("setBaseTableArray", "setBaseTableArray");
+                        Void result = null;
+                        checkTypesTask.onPostExecute(result);
                         for (int i = 0; i < day; i++) {
                             for (int j = 0; j < classtime; j++) {
                                 myClickListener = new MyClickListener(i, j);
@@ -853,7 +848,6 @@ public class MainActivity extends AppCompatActivity {
 //                        setBasetimetableColor();
                         setTableColor(colorChoice);
                     }
-
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
@@ -975,6 +969,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             asyncDialog.setMessage("로딩중입니다..");
+            asyncDialog.setCanceledOnTouchOutside(false);
             // show dialog
             asyncDialog.show();
             super.onPreExecute();
