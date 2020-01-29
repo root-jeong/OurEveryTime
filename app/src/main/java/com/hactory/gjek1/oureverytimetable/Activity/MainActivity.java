@@ -3,6 +3,7 @@ package com.hactory.gjek1.oureverytimetable.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -149,6 +151,10 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     private CheckTypesTask checkTypesTask;
 
+    private long backKeyPressedTime = 0;
+    // 첫 번째 뒤로가기 버튼을 누를때 표시
+    private Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -247,14 +253,14 @@ public class MainActivity extends AppCompatActivity {
 
         // textView setting
         String textViewID;
-                int resID;
-                int time;
-                for (int i = 0; i < day; i++) {
-                    for (int j = 0; j < classtime; j++) {
-                        final int n = i, m = j;
-                        time = 96 + (j * 6);
-                        textViewID = "textView_" + i + "_" + Integer.toString(time);
-                        resID = getResources().getIdentifier(textViewID, "id", getPackageName());
+        int resID;
+        int time;
+        for (int i = 0; i < day; i++) {
+            for (int j = 0; j < classtime; j++) {
+                final int n = i, m = j;
+                time = 96 + (j * 6);
+                textViewID = "textView_" + i + "_" + Integer.toString(time);
+                resID = getResources().getIdentifier(textViewID, "id", getPackageName());
                 textViews[i][j] = (TextView) findViewById(resID);
             }
         }
@@ -285,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                         switch (parseEvent) {
                             case XmlPullParser.START_TAG:
                                 tag = parser.getName();
-                                if(tag.equals("response")) {
+                                if (tag.equals("response")) {
                                     response = Integer.parseInt(parser.nextText());
                                     Log.e("response", parser.nextText());
                                 }
@@ -318,10 +324,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        if(friend == null) {
+        if (friend == null) {
             Log.e("[카카오링크 intent]", "null");
-        }
-        else {
+        } else {
             Log.e("[카카오링크 intent]", friend);
             requestTask.requestFriend(friend, addFriendCallback);
         }
@@ -372,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
             storedTable.setColorSelectoin(colorChoice);
             storedTables.add(storedTable);
             String json = gson.toJson(storedTables, listType);
-            Log.e("[저장 객체]" , id + " : " + json);
+            Log.e("[저장 객체]", id + " : " + json);
 
             SharedPreferences sp = getSharedPreferences("ourTimeTable", MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
@@ -494,8 +499,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog.setContentView(R.layout.dialog_of_textview);
 
                 textView_day = dialog.findViewById(R.id.textView_day);
-                dialogTimeStart = (TextView)dialog.findViewById(R.id.dialogTimeStart);
-                dialogTime  =(TextView)dialog.findViewById(R.id.dialogTime);
+                dialogTimeStart = (TextView) dialog.findViewById(R.id.dialogTimeStart);
+                dialogTime = (TextView) dialog.findViewById(R.id.dialogTime);
 
                 ListView listView = (ListView) dialog.findViewById(R.id.listview);
 
@@ -552,8 +557,6 @@ public class MainActivity extends AppCompatActivity {
                                     Log.e(String.valueOf(myTimeTableList.size()), String.valueOf(timeTableList.size()));
                                 } else if (tag.equals("response")) {
                                     Log.e("LoadMyTableList", "LoadMyTableList Parsing Complete");
-
-
                                     for (int i = 0; i < myTimeTableList.size(); i++) {
                                         if (myTimeTableList.get(i).getIs_primary() == true) {
                                             requestTask.getTable(myTimeTableList.get(i).getId(), LoadMyTable);
@@ -680,6 +683,7 @@ public class MainActivity extends AppCompatActivity {
     // 친구리스트 불러오기
     private void setLoadMyFreindList() {
         LoadmyFriendList = new Callback() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void callback(String s) {
                 try {
@@ -721,8 +725,14 @@ public class MainActivity extends AppCompatActivity {
                                     myFriendList.add(myFriend);
                                 } else if (tag.equals("response")) {
                                     Log.e("END_TAG:response", "MyFriendList 파싱완료");
-                                    for (int i = 0; i < myFriendList.size(); i++) {
-                                        requestTask.getFriendTable(myFriendList.get(i).getUserid(), LoadmyFriendTable);
+                                    if(myFriendList.size() == 0){
+                                        baseTimeTable.setBaseTableArray();
+                                        Void result = null;
+                                        checkTypesTask.onPostExecute(result);
+                                    }else {
+                                        for (int i = 0; i < myFriendList.size(); i++) {
+                                            requestTask.getFriendTable(myFriendList.get(i).getUserid(), LoadmyFriendTable);
+                                        }
                                     }
                                 }
                         }
@@ -832,13 +842,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                         parseEvent = parser.next();
                     }
-                    Log.e("[myFriendList]",Integer.toString(myFriendList.size() + 1));
-                    Log.e("[baseTimeTable]",Integer.toString(baseTimeTable.persons.size()));
-                    if (myFriendList.size() == baseTimeTable.persons.size() + 1) {
+
+                    Log.e("[myFriendList]", Integer.toString(myFriendList.size()));
+                    Log.e("[baseTimeTable]", Integer.toString(baseTimeTable.persons.size()));
+                    if (myFriendList.size() + 1 == baseTimeTable.persons.size()) {
                         baseTimeTable.setBaseTableArray();
                         Log.e("setBaseTableArray", "setBaseTableArray");
                         Void result = null;
                         checkTypesTask.onPostExecute(result);
+                        Log.e("after","checkTypesTask");
                         for (int i = 0; i < day; i++) {
                             for (int j = 0; j < classtime; j++) {
                                 myClickListener = new MyClickListener(i, j);
@@ -870,25 +882,27 @@ public class MainActivity extends AppCompatActivity {
             this.day = day;
             this.time = time;
         }
+
         String start() {
-            int h=time/2+8;
-            int m=(time%2)*30;
-            return Integer.toString(h)+":"+(m<10 ? "0" : "")+Integer.toString(m);
+            int h = time / 2 + 8;
+            int m = (time % 2) * 30;
+            return Integer.toString(h) + ":" + (m < 10 ? "0" : "") + Integer.toString(m);
         }
+
         String end() {
-            int h=(time+1)/2+8;
-            int m=((time+1)%2)*30;
-            return Integer.toString(h)+":"+(m<10 ? "0" : "")+Integer.toString(m);
+            int h = (time + 1) / 2 + 8;
+            int m = ((time + 1) % 2) * 30;
+            return Integer.toString(h) + ":" + (m < 10 ? "0" : "") + Integer.toString(m);
         }
 
         @Override
         public void onClick(View v) {
             onCreatedDialog(CUSTOM_DIALOG_ID, baseTimeTable.getBaseTimeTableArrayByIndex(day, time)).show();
 
-            String[] days = {"월","화","수","목","금"};
+            String[] days = {"월", "화", "수", "목", "금"};
             textView_day.setText(days[day]);
             dialogTimeStart.setText(start());
-            dialogTime.setText(start()+" ~ "+end());
+            dialogTime.setText(start() + " ~ " + end());
 
             Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
@@ -927,7 +941,7 @@ public class MainActivity extends AppCompatActivity {
                 // 888 code : 저장된 테이블 불러오기 액티비티에서 intent를 넘겨받았을때의 코드
                 case 888:
                     String resultTag = data.getStringExtra("result");
-                    if(resultTag.equals("load")) {
+                    if (resultTag.equals("load")) {
                         LoadSharedPreparencedTable();
                         int selectPosition = data.getIntExtra("selectPosition", -1);
                         baseTimeTable.setPersonsCheckedByStoredTable(storedTables.get(selectPosition));
@@ -936,7 +950,7 @@ public class MainActivity extends AppCompatActivity {
                         colorChoice = storedTables.get(selectPosition).getColorSelectoin();
                         setTableColor(colorChoice);
 
-                    }else if(resultTag.equals("delete")){
+                    } else if (resultTag.equals("delete")) {
                         LoadSharedPreparencedTable();
                     }
                     break;
@@ -961,38 +975,52 @@ public class MainActivity extends AppCompatActivity {
     public Boolean getOverwrite() {
         return overwrite;
     }
+
     private class CheckTypesTask extends AsyncTask<Void, Void, Void> {
         ProgressDialog asyncDialog = new ProgressDialog(
                 MainActivity.this);
 
         @Override
-        protected void onPreExecute() {
-            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            asyncDialog.setMessage("로딩중입니다..");
-            asyncDialog.setCanceledOnTouchOutside(false);
-            // show dialog
-            asyncDialog.show();
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            try {
-                for (int i = 0; i < 5; i++) {
-                    //asyncDialog.setProgress(i * 30);
-                    Thread.sleep(500);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        protected Void doInBackground(Void... voids) {
+            publishProgress();
             return null;
         }
 
         @Override
+        protected void onPreExecute() {
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            asyncDialog.setMessage("로딩중입니다..");
+            asyncDialog.setCancelable(false);
+            asyncDialog.setCanceledOnTouchOutside(false);
+            asyncDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+                        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+                            backKeyPressedTime = System.currentTimeMillis();
+                            Toast.makeText(MainActivity.this, "한번 더 누르면 종료 됩니다", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+                            finish();
+                        }
+                    }
+                    return true;
+                }
+            });
+            asyncDialog.show();
+            super.onPreExecute();
+        }
+        @Override
         protected void onPostExecute(Void result) {
+            Log.e("asyncDialog","dismiss");
             asyncDialog.dismiss();
             super.onPostExecute(result);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
 
