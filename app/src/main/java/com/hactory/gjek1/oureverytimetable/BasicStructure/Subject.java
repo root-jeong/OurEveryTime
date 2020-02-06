@@ -11,7 +11,7 @@ public class Subject {
     private ArrayList<SubjectData> datas;
 
     public Subject() {
-
+        datas = new ArrayList<>();
     }
 
     public int getSubjectId() {

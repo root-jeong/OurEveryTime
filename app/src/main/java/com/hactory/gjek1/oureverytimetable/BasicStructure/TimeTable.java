@@ -7,7 +7,7 @@ public class TimeTable {
     private String tableId;
 
     public TimeTable() {
-
+        subjects = new ArrayList<>();
     }
 
     public ArrayList<Subject> getSubjects() {

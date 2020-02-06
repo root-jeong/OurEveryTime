@@ -155,6 +155,9 @@ public class MainActivity extends AppCompatActivity {
     // 첫 번째 뒤로가기 버튼을 누를때 표시
     private Toast toast;
 
+    // 나의 시간표가 primary 시간표가 있는가? 현재학기에대해서
+    boolean hasPrimary = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -559,9 +562,16 @@ public class MainActivity extends AppCompatActivity {
                                     Log.e("LoadMyTableList", "LoadMyTableList Parsing Complete");
                                     for (int i = 0; i < myTimeTableList.size(); i++) {
                                         if (myTimeTableList.get(i).getIs_primary() == true) {
+                                            hasPrimary = true;
                                             requestTask.getTable(myTimeTableList.get(i).getId(), LoadMyTable);
                                             break;
                                         }
+                                    }
+                                    if(!hasPrimary){
+                                        person = new Person();
+                                        person.setChecked(false);
+                                        person.setName("나(본인)");
+                                        baseTimeTable.addPerson(person);
                                     }
                                 }
                         }
@@ -768,7 +778,7 @@ public class MainActivity extends AppCompatActivity {
                     parser.setInput(new InputStreamReader(targetStream, "UTF-8"));
                     int parseEvent = parser.getEventType();
 
-                    Log.e("LoadMyTable", "LoadMyTable Parsing Start");
+                    Log.e("LoadMyTable", "LoadmyFriendTable Parsing Start");
                     while (parseEvent != XmlPullParser.END_DOCUMENT) {
                         switch (parseEvent) {
                             case XmlPullParser.START_TAG:
@@ -821,7 +831,7 @@ public class MainActivity extends AppCompatActivity {
                                     isTable = false;
                                     timeTable.setSubjects(subjects);
                                     person.setTimeTable(timeTable);
-                                    Log.e("END_TAG:table", "Mytable 파싱완료");
+                                    Log.e("END_TAG:table", "FriendTable 파싱완료");
 
                                 } else if (tag.equals("time")) {
                                     isTime = false;

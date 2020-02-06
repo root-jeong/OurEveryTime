@@ -16,14 +16,15 @@ public class BaseTimeTable {
     final static int classtime = 32;
     public ArrayList<Person> persons; // Parser 완료후 0번index : 본인 / 나머지 : 친구
     private BaseTimeTableItem baseTimeTableItem; // BaseTableArray[][] 배열에 들어가는 임시 아이템클래스 객체
-    private  BaseTableArray[][] baseTableArrays; // 월화수목금(5) x 26교시(26)
+    private BaseTableArray[][] baseTableArrays; // 월화수목금(5) x 26교시(26)
     //private String[] days = {"월","화","수","목","금"};//  0번은 Null값으로 두고 [1][1] = [월요일][1교시] / [5][26] = [금요일][26교시]  / 그래서 배열의크기 : [6][27]
     private StoredTable storedTable;
-    public BaseTimeTable(){
+
+    public BaseTimeTable() {
         persons = new ArrayList<Person>();
     }
 
-    public void addPerson(Person person){
+    public void addPerson(Person person) {
         persons.add(person);
     }
 
@@ -38,11 +39,12 @@ public class BaseTimeTable {
             }
         }
 
-        for(int i=0; i< day; i++){
-            for(int startTime = 96; startTime <= 282; startTime = (startTime+6)){
+        for (int i = 0; i < day; i++) {
+            for (int startTime = 96; startTime <= 282; startTime = (startTime + 6)) {
                 BaseTableArray baseTableArray = new BaseTableArray();
-                for(int personNum = 0; personNum < persons.size(); personNum++) {
+                for (int personNum = 0; personNum < persons.size(); personNum++) {
                     if (persons.get(personNum).getChecked() == true) {
+                        if (persons.get(personNum).getTimeTable() == null) continue;
                         for (int subjectNum = 0; subjectNum < persons.get(personNum).getTimeTable().getSubjects().size(); subjectNum++) {
                             for (int subjectDataNum = 0; subjectDataNum < persons.get(personNum).getTimeTable().getSubjects().get(subjectNum).getData().size(); subjectDataNum++) {
                                 baseTimeTableItem = new BaseTimeTableItem();
@@ -67,7 +69,7 @@ public class BaseTimeTable {
         setBaseTableArraysOverrayNum();
     }
 
-    public  void setBaseTableArraysOverrayNum(){
+    public void setBaseTableArraysOverrayNum() {
         for (int i = 0; i < day; i++) {
             for (int j = 0; j < classtime; j++) {
                 baseTableArrays[i][j].setOverRayNumber(baseTableArrays[i][j].getItemList().size());
@@ -100,39 +102,44 @@ public class BaseTimeTable {
     public BaseTableArray getBaseTimeTableArrayByIndex(int column, int row) {
         return baseTableArrays[column][row];
     }
+
     //    public BaseTableArray getBaseTimeTableArrayItemSizeByIndex(int column, int row) {
 //        return baseTableArrays[column][row];
 //    }
-    public int getPersonsize(){
+    public int getPersonsize() {
         int size = 0;
-        for(int i = 0; i < persons.size(); i++){
+        for (int i = 0; i < persons.size(); i++) {
             size += 1;
         }
         return size;
     }
-    public ArrayList<Person> getPersons(){
+
+    public ArrayList<Person> getPersons() {
         return this.persons;
     }
-    public void setPersonsChecked(ArrayList<Person> persons){
-        for(int i = 0; i< persons.size(); i++){
+
+    public void setPersonsChecked(ArrayList<Person> persons) {
+        for (int i = 0; i < persons.size(); i++) {
             this.persons.get(i).setChecked(persons.get(i).getChecked());
         }
     }
-    public int getCheckedPersonCount(){
+
+    public int getCheckedPersonCount() {
         int count = 0;
-        for(int i = 0; i < persons.size(); i ++){
-            if(persons.get(i).getChecked() == true){
+        for (int i = 0; i < persons.size(); i++) {
+            if (persons.get(i).getChecked() == true) {
                 count += 1;
             }
 
         }
         return count;
     }
-    public StoredTable getStoredTable (String title){
+
+    public StoredTable getStoredTable(String title) {
         ArrayList<StoredPerson> storedPersons = new ArrayList<StoredPerson>();
         StoredPerson storedPerson;
         StoredTable storedTable = new StoredTable();
-        for(int i = 0; i < getPersonsize(); i++){
+        for (int i = 0; i < getPersonsize(); i++) {
             storedPerson = new StoredPerson();
             storedPerson.setChecked(persons.get(i).getChecked());
             storedPerson.setName(persons.get(i).getName());
@@ -159,9 +166,9 @@ public class BaseTimeTable {
 
     public void setPersonsCheckedByStoredTable(StoredTable storedTable) {
         this.storedTable = storedTable;
-        Log.e("persons size",Integer.toString(persons.size()));
-        Log.e("getPersonsize()",Integer.toString(getPersonsize()));
-        for(int i = 0 ; i < getPersonsize(); i ++){
+        Log.e("persons size", Integer.toString(persons.size()));
+        Log.e("getPersonsize()", Integer.toString(getPersonsize()));
+        for (int i = 0; i < getPersonsize(); i++) {
             persons.get(i).setChecked(this.storedTable.getStoredPerson().get(i).isChecked());
         }
     }

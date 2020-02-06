@@ -7,11 +7,13 @@ import java.util.ArrayList;
 
 public class StoredTable implements Parcelable {
     private String title;
-    private ArrayList<StoredPerson> StoredPerson;
+    private ArrayList<StoredPerson> StoredPerson = new ArrayList<>();
     private int colorSelectoin;
 
 
-    public StoredTable(){}
+    public StoredTable() {
+
+    }
 
     protected StoredTable(Parcel in) {
         title = in.readString();

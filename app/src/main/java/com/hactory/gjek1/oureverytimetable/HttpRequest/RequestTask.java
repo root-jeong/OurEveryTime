@@ -40,7 +40,7 @@ public class RequestTask {
 
     public void getTable(String tableId, Callback callback) {
         // URL 설정.
-        String url = "https://everytime.kr/find/timetable/table";
+        String url = "https://api.everytime.kr/find/timetable/table";
 
         // 파라미터 설정
         ContentValues param = new ContentValues();
@@ -53,7 +53,7 @@ public class RequestTask {
 
     public void getTableList(String year, String semester, Callback callback) {
         // URL 설정.
-        String url = "https://everytime.kr/find/timetable/table/list/semester";
+        String url = "https://api.everytime.kr/find/timetable/table/list/semester";
 
         // 파라미터 설정
         ContentValues param = new ContentValues();
@@ -67,7 +67,7 @@ public class RequestTask {
 
     public void getFriendList(Callback callback) {
         // URL 설정.
-        String url = "https://everytime.kr/find/friend/list";
+        String url = "https://api.everytime.kr/find/friend/list";
 
         // 파라미터 설정
         ContentValues param = new ContentValues();
@@ -79,7 +79,7 @@ public class RequestTask {
 
     public void getFriendTable(String identifier, Callback callback) {
         // URL 설정.
-        String url = "https://everytime.kr/find/timetable/table/friend";
+        String url = "https://api.everytime.kr/find/timetable/table/friend";
 
         // 파라미터 설정
         ContentValues param = new ContentValues();
@@ -93,7 +93,7 @@ public class RequestTask {
 
     public void requestFriend(String userid, Callback callback) {
         // URL 설정.
-        String url = "https://everytime.kr/save/friend/request";
+        String url = "https://api.everytime.kr/save/friend/request";
 
         // 파라미터 설정
         ContentValues param = new ContentValues();
@@ -122,9 +122,9 @@ public class RequestTask {
             HttpClient client = new DefaultHttpClient();
 
             HttpPost post = new HttpPost(url);
-            List<BasicNameValuePair> params  = new ArrayList<>();
+            List<BasicNameValuePair> params = new ArrayList<>();
 
-            for(Map.Entry<String, Object> parameter : _params.valueSet()){
+            for (Map.Entry<String, Object> parameter : _params.valueSet()) {
                 String key = parameter.getKey();
                 String value = parameter.getValue().toString();
 
@@ -137,12 +137,11 @@ public class RequestTask {
                 client.execute(post);
                 CookieStore cookies = ((DefaultHttpClient) client).getCookieStore();
                 for (Cookie cookieItem : cookies.getCookies()) {
-                    if(cookieItem.getName().equals("etsid")) {
+                    if (cookieItem.getName().equals("etsid")) {
                         return cookieItem.getName() + "=" + cookieItem.getValue();
                     }
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -163,12 +162,12 @@ public class RequestTask {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(s == null) {
+            if (s == null) {
                 callback.callback(null);
                 return;
             }
 
-            if(s.contains("etsid")) {
+            if (s.contains("etsid")) {
                 setCookie(s);
             }
             callback.callback(s);
